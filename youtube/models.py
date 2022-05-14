@@ -5,5 +5,6 @@ class Video_info(db.Model):
     title = db.Column(db.String, nullable=False)
     creator = db.Column(db.String, nullable=False)
     video_pic = db.Column(db.String(500), nullable=True)
+    link_video = db.Column(db.String(500), nullable=False)
 
 db.create_all()

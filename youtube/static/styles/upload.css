@@ -1,7 +1,7 @@
 .uploud-form-box{
 	padding-top: 100px;
 	min-width: 300px;
-	padding-bottom: 260px;
+	padding-bottom: 190px;
 	display:flex;
 	justify-content: center;
 	background: linear-gradient(to right, rgb(248, 58, 11), rgba(241, 201, 201, 0.959), rgb(248,58,11));	
@@ -10,7 +10,7 @@
 	border: solid;
 	border-width: 1px;
 	padding: 40px;
-	border-radius: 10px;
+	border-radius: 5px;
 	background-color: rgba(248, 58, 11 ,0.7);
 }
 
@@ -31,7 +31,8 @@
 
 	
 }
-.data-control{
+.data-control,
+.data-control-file{
 	font-family: Roboto,Arial;
 	font-weight: bold;
 	background-color: white;
@@ -39,7 +40,9 @@
 	width: 100%;
 	padding-top: 7px;
 	padding-bottom: 7px;
-
-	
-
+	transition: all 0.15s;
+}
+.data-control:hover{
+	background-color: rgba(248, 58, 11 ,0.7);
+	color: white;
 }

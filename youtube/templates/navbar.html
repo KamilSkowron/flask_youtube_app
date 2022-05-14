@@ -50,10 +50,10 @@
 		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/home.svg') }}">
 		<div>Home</div>
 	</div>
-	<div class="sidebar-link">
+	<a href="{{ url_for('explore') }}" class="sidebar-link">
 		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/explore.svg') }}">
 		<div>Explore</div>
-	</div>
+	</a>
 	<div class="sidebar-link">
 		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/subscriptions.svg') }}">
 		<div>Subscriptions</div>

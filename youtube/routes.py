@@ -1,12 +1,11 @@
-from PIL import Image
-import uuid as uuid
-import os
+
 from youtube import app, render_template, secure_filename, db, request, Response, flash
 from youtube.models import Video_info
 from youtube.forms import AddNewVideoForm
+from youtube.functions import get_picture
 
 
-@app.route('/youtube')
+@app.route('/')
 def home_page():
     videos = Video_info.query.all()
     return render_template('youtube.html',videos=videos)
@@ -18,16 +17,12 @@ def add_video():
 
     if form.validate_on_submit():
 
-        video_pic_file = request.files['video_pic']
-        i = Image.open(video_pic_file)
-        out = i.resize((1280,720))
-        pic_filename = secure_filename(video_pic_file.filename)
-        pic_name = str(uuid.uuid1()) + "_" + pic_filename
-        out.save(os.path.join(app.config['UPLOAD_FOLDER'], pic_name))
+        pic_name = get_picture("video_pic")
 
         video = Video_info(title=form.title.data,
                         creator=form.creator.data,
-                        video_pic=pic_name)
+                        video_pic=pic_name,
+                        link_video=form.link_video.data)
         
         form.title.data = ""
         form.creator.data =""
@@ -38,6 +33,8 @@ def add_video():
         flash("Blog Post Submitted Successfully!")
 
     return render_template("upload.html",form=form)    
-    
 
+@app.route('/explore', methods=['POST','GET'])
+def explore():
 
+    return render_template("explore.html")    

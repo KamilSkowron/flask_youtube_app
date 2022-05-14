@@ -7,12 +7,12 @@
 		{% for video in videos %}
 
 		<div class="video-preview">
-			<div class="thumbnail-row">
+			<a href="{{ video.link_video }}" class="thumbnail-row">
 
 				<img class="thumbnail"
 					src="{{ url_for('static', filename='images/video_pics/' + video.video_pic) }}"" align=" right">
 				<!--<div class="video-time">14:20</div> -->
-			</div>
+			</a>
 			<div class="video-info-grid">
 				<div class="channel_picture">
 					<img class="profile-picture"

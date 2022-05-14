@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+	Hey {{ name }} - {{ message }}
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+
 <form class="uploud-form-box" action="http://localhost:5000/upload" enctype="multipart/form-data" method="POST">
 	<div class="box-container">
 
@@ -10,20 +20,19 @@
 			{{ form.title(class="data-control", placeholder="Title") }}
 		</div>
 
-		<br>
-
-
 		<div class="data-container">
 			{{ form.creator.label(class="data-label") }}
 			{{ form.creator(class="data-control", placeholder="Creator") }}
-
 		</div>
 
-		<br>
 		<div class="data-container">
 			{{ form.video_pic.label(class="data-label") }}
-			{{ form.video_pic(class="data-control") }}
+			{{ form.video_pic(class="data-control-file") }}
+		</div>
 
+		<div class="data-container">
+			{{ form.link_video.label(class="data-label") }}
+			{{ form.link_video(class="data-control", placeholder="Url link") }}
 		</div>
 
 
