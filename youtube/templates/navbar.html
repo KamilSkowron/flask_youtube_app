@@ -1,0 +1,73 @@
+<header class="header">
+	<div class="left-section">
+		<img class="icon-hamburger" src=" {{ url_for('static', filename='icons-navbar/hamburger-menu.svg') }}">
+
+		<a class="upload-icon-container" href="{{ url_for('home_page') }}"><img class="icon-youtube" src=" {{ url_for('static', filename='icons-navbar/youtube-logo.svg') }}"></a>
+		
+	</div>
+	<div class="middle-section">
+		<input class="search-bar" type="text" placeholder="Search">
+		<button class="search-button">
+			<img class="search-icon" src="{{ url_for('static', filename='icons-navbar/search.svg') }}">
+			<div class="tooltip">Search</div>
+		</button>
+		<button class="voice-search-button">
+			<img class="voice-search-icon" src="{{ url_for('static', filename='icons-navbar/voice-search-icon.svg') }}">
+			<div class="tooltip">Search with your voice</div>
+		</button>
+	</div>
+	<div class="right-section">
+		<a class="upload-icon-container" href="{{ url_for('add_video') }}">
+
+			<img class="icon-right" src="{{ url_for('static', filename='icons-navbar/upload.svg') }}">
+			<div class="tooltip">Create</div>
+		</a>
+		<div class="upload-icon-container">
+			<img class="icon-right" src="{{ url_for('static', filename='icons-navbar/youtube-apps.svg') }}">
+			<div class="tooltip">Youtube Apps</div>
+		</div>
+
+		<div class="notifications-icon-container">
+			<div class="upload-icon-container">
+				<img class="icon-right" src="{{ url_for('static', filename='icons-navbar/notifications.svg') }}">
+				<div class="tooltip">Notifications</div>
+			</div>
+
+			<div class="notifications-count">3</div>
+
+		</div>
+		<div class="upload-icon-container">
+			<img class="icon-profile" src="{{ url_for('static', filename='channel_pictures/my-channel.jpeg') }}">
+			<div class="tooltip">Profile</div>
+		</div>
+
+	</div>
+
+</header>
+
+<nav class="sidebar">
+	<div class="sidebar-link">
+		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/home.svg') }}">
+		<div>Home</div>
+	</div>
+	<div class="sidebar-link">
+		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/explore.svg') }}">
+		<div>Explore</div>
+	</div>
+	<div class="sidebar-link">
+		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/subscriptions.svg') }}">
+		<div>Subscriptions</div>
+	</div>
+	<div class="sidebar-link">
+		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/originals.svg') }}">
+		<div>Originals</div>
+	</div>
+	<div class="sidebar-link">
+		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/youtube-music.svg') }}">
+		<div>YouTube Music</div>
+	</div>
+	<div class="sidebar-link">
+		<img class="icon-sidebar" src="{{ url_for('static', filename='icons-sidebar/library.svg') }}">
+		<div>Library</div>
+	</div>
+</nav>

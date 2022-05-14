@@ -1,0 +1,45 @@
+.uploud-form-box{
+	padding-top: 100px;
+	min-width: 300px;
+	padding-bottom: 260px;
+	display:flex;
+	justify-content: center;
+	background: linear-gradient(to right, rgb(248, 58, 11), rgba(241, 201, 201, 0.959), rgb(248,58,11));	
+}
+.box-container{
+	border: solid;
+	border-width: 1px;
+	padding: 40px;
+	border-radius: 10px;
+	background-color: rgba(248, 58, 11 ,0.7);
+}
+
+.data-container{
+	background-color: white;
+	padding: 20px;
+	border-radius: 7px;
+	border-style: solid;
+	border-width: 1px;
+	
+}
+
+.data-label{
+	font-family: Roboto,Arial;
+	font-size: 20px;
+	font-weight: bold;
+	width: 100%;
+
+	
+}
+.data-control{
+	font-family: Roboto,Arial;
+	font-weight: bold;
+	background-color: white;
+	border-color: red;
+	width: 100%;
+	padding-top: 7px;
+	padding-bottom: 7px;
+
+	
+
+}

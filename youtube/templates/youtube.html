@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main>
+	<section class="video-grid">
+
+		{% for video in videos %}
+
+		<div class="video-preview">
+			<div class="thumbnail-row">
+
+				<img class="thumbnail"
+					src="{{ url_for('static', filename='images/video_pics/' + video.video_pic) }}"" align=" right">
+				<!--<div class="video-time">14:20</div> -->
+			</div>
+			<div class="video-info-grid">
+				<div class="channel_picture">
+					<img class="profile-picture"
+						src="{{ url_for('static', filename='channel_pictures/channel-1.jpeg') }}">
+
+				</div>
+				<div class="video-info">
+					<p class="video-title">{{ video.title }}</p>
+					<p class="video-author">{{ video.creator }}</p>
+					<!--<p class="video-stats">3.4M views &#183; 6 months ago </p>-->
+				</div>
+			</div>
+		</div>
+
+		{% endfor %}
+
+	</section>
+</main>
+
+{% endblock %}

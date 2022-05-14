@@ -1,0 +1,17 @@
+body:active{
+	
+}
+body{
+	margin: 0;
+	background-color: rgb(240, 240, 240);
+	padding-right: 10px;
+	margin-left: 80px;
+	margin-top: 60px;
+}
+
+p{
+	font-family:Roboto, Arial;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	
+}
