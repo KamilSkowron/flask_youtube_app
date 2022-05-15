@@ -1,8 +1,10 @@
 
+from flask import jsonify
 from youtube import app, render_template, secure_filename, db, request, Response, flash
 from youtube.models import Video_info
 from youtube.forms import AddNewVideoForm
 from youtube.functions import get_picture
+from youtube.apis import get_most_popular_videos
 
 
 @app.route('/')
@@ -25,7 +27,7 @@ def add_video():
                         link_video=form.link_video.data)
         
         form.title.data = ""
-        form.creator.data =""
+        form.creator.data = ""
 
         db.session.add(video)
         db.session.commit()
@@ -37,4 +39,6 @@ def add_video():
 @app.route('/explore', methods=['POST','GET'])
 def explore():
 
-    return render_template("explore.html")    
+    videos = get_most_popular_videos()
+    #return jsonify(videos) # most_views_response['items']
+    return render_template('explore.html',videos=videos)

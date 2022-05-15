@@ -4,7 +4,34 @@
 {% block content %}
 
 
+<section class="video-grid">
 
+	{% for video in videos %}
+
+	<div class="video-preview">
+		<a href={{ video.url }} class="thumbnail-row">
+
+			<img class="thumbnail"
+				src={{ video.thumbnails}} align=" right">
+			<!--<div class="video-time">14:20</div> -->
+		</a>
+		<div class="video-info-grid">
+			<div class="channel_picture">
+				<img class="profile-picture" src="{{ url_for('static', filename='channel_pictures/channel-1.jpeg') }}">
+
+			</div>
+			<div class="video-info">
+				<p class="video-title">{{ video.title }}</p>
+				<p class="video-author">{{ video.creator }}</p>
+				<p class="video-stats">{{ video.views}} views &#183; {{ video.publishedDate }} days ago </p>
+			</div>
+		</div>
+	</div>
+
+	{% endfor %}
+
+</section>
+</main>
 
 
 
