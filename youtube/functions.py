@@ -13,4 +13,9 @@ def get_picture(file):
     out.save(os.path.join(app.config['UPLOAD_FOLDER'], pic_name))
     return pic_name
 
-
+def convert_views_to_readable(views):
+	views = views[::-1]
+	subList = [views[n:n+3] for n in range(0,len(views), 3)][::-1]
+	Z = [i[::-1] for i in subList]
+	views_with_dots = ".".join(Z)
+	return views_with_dots

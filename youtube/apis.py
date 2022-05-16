@@ -1,14 +1,14 @@
 from flask import jsonify
 from googleapiclient.discovery import build
 from datetime import datetime
-
+from youtube.functions import convert_views_to_readable
 import os
 
 def get_most_popular_videos(region_code="", category_ID=0):
     api_key = os.environ.get('YT_API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
     videos = []
-    creators = []
+    creators_list = []
 
     most_views_request = youtube.videos().list(
         part='statistics, snippet',
@@ -30,15 +30,6 @@ def get_most_popular_videos(region_code="", category_ID=0):
         
         days_diff = abs((current_datetime - pub_date).days)
 
-        #print(video['snippet']['channelId'])
-
-        creator_profile = youtube.channels().list(
-            part='snippet',
-            id=video['snippet']['channelId']
-        )
-
-        creator_profile_response = creator_profile.execute()
-
         videos.append(
             {
                 'title' : video['snippet']['title'],
@@ -48,13 +39,27 @@ def get_most_popular_videos(region_code="", category_ID=0):
                 'thumbnails' : video['snippet']['thumbnails']['high']['url'],
                 'publishedDate' : days_diff,
                 'description' : video['snippet']['description'][:100],
-                'profile_pic' : creator_profile_response['items'][0]['snippet']['thumbnails']['default']['url']
+                'views_read' : convert_views_to_readable(vid_views),
+                'creatorID' : video['snippet']['channelId']
             }
         )
+    for i in videos:
+        creators_list.append(i['creatorID'])
+    idd = ",".join(creators_list)
 
-        videos.sort(key= lambda vid: vid['views'], reverse=True) # url, views
+    creator_profile = youtube.channels().list(
+    part='snippet',
+    id = idd
+    )
 
-        #creators.append(video['']
+    creator_profile_response = creator_profile.execute()
 
+    profile_pics = [x['snippet']['thumbnails']['default']['url'] for x in creator_profile_response['items']]
+    print(len(profile_pics))
+    for i, video in enumerate(videos[:24]):
+        video['profile_pics'] = profile_pics[i]
+        print(video)
+        print("")
+
+    videos.sort(key= lambda vid: vid['views'], reverse=True) # url, views
     return videos
-    #return most_views_response['items']
