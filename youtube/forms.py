@@ -9,4 +9,8 @@ class AddNewVideoForm(FlaskForm):
     video_pic = FileField ("Video Pic:")
     link_video = StringField(label='Link to youtube file:', validators=[URL()])
     submit = SubmitField(label='Add new Video!')
+
+
+class SubmitButtonForm(FlaskForm):
+    submit = SubmitField(label='TEST!')
     

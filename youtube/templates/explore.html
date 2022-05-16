@@ -4,33 +4,63 @@
 {% block content %}
 
 
-<section class="video-grid">
+<div class="main-contener">
+	<div class="videos-container">
+		{% for video in videos %}
 
-	{% for video in videos %}
+		<div class="video-preview-explore">
+			<a href={{ video.url }} class="thumbnail-row">
 
-	<div class="video-preview">
-		<a href={{ video.url }} class="thumbnail-row">
+				<img class="thumbnail" src={{ video.thumbnails}} align=" right">
+				<!--<div class="video-time">14:20</div> -->
+			</a>
+			<div class="video-info-grid">
+				<div class="channel_picture">
+					<img class="profile-picture"
+						src="{{ video.profile_pic }}">
 
-			<img class="thumbnail"
-				src={{ video.thumbnails}} align=" right">
-			<!--<div class="video-time">14:20</div> -->
-		</a>
-		<div class="video-info-grid">
-			<div class="channel_picture">
-				<img class="profile-picture" src="{{ url_for('static', filename='channel_pictures/channel-1.jpeg') }}">
-
-			</div>
-			<div class="video-info">
-				<p class="video-title">{{ video.title }}</p>
-				<p class="video-author">{{ video.creator }}</p>
-				<p class="video-stats">{{ video.views}} views &#183; {{ video.publishedDate }} days ago </p>
+				</div>
+				<div class="video-info">
+					<p class="video-title">{{ video.title }}</p>
+					<p class="video-stats">{{ video.description }}</p>
+					<p class="video-author">{{ video.creator }}</p>
+					<p class="video-stats">{{ video.views}} views &#183; {{ video.publishedDate }} days ago </p>
+				</div>
 			</div>
 		</div>
+
+		{% endfor %}
 	</div>
 
-	{% endfor %}
 
-</section>
+	<div class="setting-container">
+		<form class="form-inline" method="POST" action="{{ url_for('explore') }}">
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">Country: </span>
+					<select name="region" id="region" class="selectpicker form-control">
+						{% for o in region_list %}
+						<option value="{{ o.region }}">{{ o.display }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon">Category: </span>
+					<select name="category" id="category" class="selectpicker form-control">
+						{% for o in category_list %}
+						<option value="{{ o.categoryID }}">{{ o.display }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-default">Go</button>
+			</div>
+		</form>
+
+	</div>
+</div>
 </main>
 
 

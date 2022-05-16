@@ -1,0 +1,35 @@
+.main-contener{
+	display: flex;
+	margin-left: 200px;
+	justify-content: space-between;
+	
+}
+
+.videos-container{
+	width: 700px;
+	
+}
+
+.setting-container{
+	width: 200px;
+}
+
+.video-preview-explore{
+	display: flex;
+}
+
+.thumbnail-row{
+	flex: 1;
+}
+
+.video-info-grid{
+	margin-left: 20px;
+	margin-top: 5px;
+	flex: 3;
+}
+
+.setting-container{
+	background-color: black;
+	color: white;
+	flex: 1;
+}
