@@ -29,7 +29,48 @@
 }
 
 .setting-container{
-	background-color: black;
-	color: white;
+
 	flex: 1;
+	padding-left: 50px;
+	padding-top: 30px;
+}
+
+.input-group{
+	font-family: Roboto, Arial;
+	font-weight: bold;
+	font-size: 20px;
+
+
+}
+
+.Setting-button{
+	padding: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: rgb(255, 0, 0, 0.7);
+	color: white;
+	font-family: Roboto, Arial;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 3px;
+	border: none;
+	box-shadow: 3px 3px 5px black;
+	cursor: pointer;
+	transition: box-shadow 0.15s;
+}
+
+.Setting-button:hover{
+	
+	box-shadow: 5px 5px 5px black;
+}
+
+
+
+
+.form-group{
+	border: solid;
+	padding: 10px;
+	width: 300px;
+	border-radius: 7px;
+	border-width: 2px;
 }

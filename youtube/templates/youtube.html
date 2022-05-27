@@ -10,8 +10,14 @@
 			<a href="{{ video.link_video }}" class="thumbnail-row">
 
 				<img class="thumbnail"
-					src="{{ url_for('static', filename='images/video_pics/' + video.video_pic) }}"" align=" right">
+					
+					src="{{ url_for('static', filename='images/video_pics/' + video.video_pic) }}"
+					onerror="this.onerror=null;this.src='https://placeimg.com/1000/720/any';" style="height: 200px;"
+					align=" right">
 				<!--<div class="video-time">14:20</div> -->
+				
+
+
 			</a>
 			<div class="video-info-grid">
 				<div class="channel_picture">

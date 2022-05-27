@@ -6,8 +6,7 @@ class Videos(Resource):
     def get(self):
         videos = Video_info.query.all()
         videos_data = [video.to_dict() for video in videos]
-        print(videos_data)
-        return videos_data
+        return videos_data, 200
     
 
     def post(self):
@@ -28,7 +27,7 @@ class Videos(Resource):
 class Video(Resource):
     def get(self, video_id):
         video = Video_info.query.get_or_404(video_id)
-        return video.to_dict()
+        return video.to_dict(), 200
 
     def put(self, video_id):
         video = Video_info.query.get_or_404(video_id)
@@ -41,12 +40,12 @@ class Video(Resource):
 
         db.session.commit()
 
-        return video.to_dict()
+        return video.to_dict(), 204
 
     def delete(self, video_id):
         video = Video_info.query.get_or_404(video_id)
         db.session.delete(video)
-        db.session.commit()
+        db.session.commit(), 204
 
 
     
