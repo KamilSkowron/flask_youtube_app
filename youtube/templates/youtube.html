@@ -22,7 +22,14 @@
 				<div class="video-info">
 					<p class="video-title">{{ video.title }}</p>
 					<p class="video-author">{{ video.creator }}</p>
+					
 					<!--<p class="video-stats">3.4M views &#183; 6 months ago </p>-->
+				</div>
+				<div>
+					<form action="/delete_video/{{video.id}}">
+						<input type="submit" value="X" class="delete_video_button">
+					</form>
+					
 				</div>
 			</div>
 		</div>

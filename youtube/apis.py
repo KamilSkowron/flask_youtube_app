@@ -8,58 +8,64 @@ def get_most_popular_videos(region_code="", category_ID=0):
     api_key = os.environ.get('YT_API_KEY')
     youtube = build('youtube', 'v3', developerKey=api_key)
     videos = []
-    creators_list = []
-
-    most_views_request = youtube.videos().list(
-        part='statistics, snippet',
-        maxResults=50,
-        chart='mostPopular',
-        videoCategoryId = category_ID,
-        regionCode = region_code
-    )
-    most_views_response = most_views_request.execute()
     
-    for video in most_views_response['items']:
-        vid_views = video['statistics']['viewCount']
-        vid_id = video['id']
-        yt_link = f'https://youtu.be/{vid_id}'
+    round_num = 0
+    nextPageToken = None
 
-        current_datetime = datetime.utcnow()
-        pub_date = video['snippet']['publishedAt']
-        pub_date = datetime.strptime(pub_date, '%Y-%m-%dT%H:%M:%SZ')
-        
-        days_diff = abs((current_datetime - pub_date).days)
-
-        videos.append(
-            {
-                'title' : video['snippet']['title'],
-                'creator' : video['snippet']['channelTitle'],
-                'views' : int(vid_views),
-                'url' : yt_link,
-                'thumbnails' : video['snippet']['thumbnails']['high']['url'],
-                'publishedDate' : days_diff,
-                'description' : video['snippet']['description'][:100],
-                'views_read' : convert_views_to_readable(vid_views),
-                'creatorID' : video['snippet']['channelId']
-            }
+    while True:
+        most_views_request = youtube.videos().list(
+            part='statistics, snippet',
+            maxResults=50,
+            chart='mostPopular',
+            videoCategoryId = category_ID,
+            regionCode = region_code,
+            pageToken=nextPageToken
         )
-    for i in videos:
-        creators_list.append(i['creatorID'])
-    idd = ",".join(creators_list)
+        most_views_response = most_views_request.execute()
 
-    creator_profile = youtube.channels().list(
-    part='snippet',
-    id = idd
-    )
+        creators_list = []
 
-    creator_profile_response = creator_profile.execute()
+        for i in most_views_response['items']:
+            creators_list.append(i['snippet']['channelId'])
 
-    profile_pics = [x['snippet']['thumbnails']['default']['url'] for x in creator_profile_response['items']]
-    print(len(profile_pics))
-    for i, video in enumerate(videos[:24]):
-        video['profile_pics'] = profile_pics[i]
-        print(video)
-        print("")
+        creator_profile = youtube.channels().list(
+            part='snippet',
+            id=','.join(creators_list),
+            maxResults=50,
+            pageToken=nextPageToken
+        )
 
-    videos.sort(key= lambda vid: vid['views'], reverse=True) # url, views
+        creator_profile_response = creator_profile.execute() # returns list with no duplicates and in random order (correct it in some day)
+
+        for i, video in enumerate(most_views_response['items']):
+            vid_views = video['statistics']['viewCount']
+            yt_link = f"https://youtu.be/{video['id']}"
+
+            current_datetime = datetime.utcnow()
+            pub_date = datetime.strptime(video['snippet']['publishedAt'], '%Y-%m-%dT%H:%M:%SZ')
+            
+            days_diff = abs((current_datetime - pub_date).days)
+
+            videos.append(
+                {
+                    'title' : video['snippet']['title'],
+                    'creator' : video['snippet']['channelTitle'],
+                    'views' : int(vid_views),
+                    'url' : yt_link,
+                    'thumbnails' : video['snippet']['thumbnails']['high']['url'],
+                    'publishedDate' : days_diff,
+                    'description' : video['snippet']['description'][:100],
+                    'views_read' : convert_views_to_readable(vid_views),
+                    'creatorID' : video['snippet']['channelId'],
+                    'profile_pic' : creator_profile_response['items'][i]['snippet']['thumbnails']['default']['url'] if i < len(creator_profile_response['items']) else 0
+                }
+            )
+
+        round_num += 1
+        nextPageToken = most_views_response.get('nextPageToken')
+
+        if (not nextPageToken) or round_num == 20:
+            break
+
+    #videos.sort(key= lambda vid: vid['views'], reverse=True) 
     return videos

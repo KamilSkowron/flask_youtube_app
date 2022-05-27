@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Response, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
+from flask_restx import Api, Resource
 
 
 # Start application
@@ -20,5 +21,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Connect app with database
 db = SQLAlchemy(app)
 
+api = Api(app)
 
 from youtube import routes
+from youtube import restAPI

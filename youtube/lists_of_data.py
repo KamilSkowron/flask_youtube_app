@@ -1,0 +1,3 @@
+region_list=[{'region':'' , 'display':'All World'}, {'region':'PL', 'display':'Poland'}, {'region':'NZ', 'display':'New Zealand'}, {'region':'GR', 'display':'Germany'}, {'region':'GB', 'display':'Great Britain'}, {'region':'CZ', 'display':'Czech Republic'}, {'region':'RU', 'display':'Russia'}]
+
+category_list=[{'categoryID': 0, 'display':'All Categories'}, {'categoryID':10, 'display':'Music'}, {'categoryID':20, 'display':'Gaming'}, {'categoryID':23, 'display':'Comedy'}, {'categoryID':27, 'display':'Education'}, {'categoryID':28, 'display':'Science & Technology'}]

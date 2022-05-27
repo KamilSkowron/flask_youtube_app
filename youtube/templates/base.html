@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Youtube</title>
+
 	<link rel="stylesheet" href=" {{ url_for('static',filename='styles/general.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static',filename='styles/video.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static',filename='styles/sidebar.css') }}">
@@ -24,6 +25,16 @@
 <body>
 
 	{% include 'navbar.html' %}
+	
+	{% for message in get_flashed_messages() %}
+
+	<div class="alert alert-primary alert-dismissible fade show" role="alert">
+		Hey {{ name }} - {{ message }}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	
+	
+	{% endfor %}
 
 	<div class="container">
 		{% block content %}

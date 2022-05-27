@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% for message in get_flashed_messages() %}
-
-<div class="alert alert-primary alert-dismissible fade show" role="alert">
-	Hey {{ name }} - {{ message }}
-	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-
-
-{% endfor %}
 
 <form class="uploud-form-box" action="http://localhost:5000/upload" enctype="multipart/form-data" method="POST">
 	<div class="box-container">
