@@ -1,7 +1,7 @@
 from flask import jsonify
 from googleapiclient.discovery import build
 from datetime import datetime
-from youtube.functions import convert_views_to_readable
+from youtube.functions import convert_views_to_readable, TimeVideo
 import os
 
 def get_most_popular_videos(region_code="", category_ID=0):
@@ -14,7 +14,7 @@ def get_most_popular_videos(region_code="", category_ID=0):
 
     while True:
         most_views_request = youtube.videos().list(
-            part='statistics, snippet',
+            part='statistics, snippet, contentDetails',
             maxResults=50,
             chart='mostPopular',
             videoCategoryId = category_ID,
@@ -41,6 +41,12 @@ def get_most_popular_videos(region_code="", category_ID=0):
             vid_views = video['statistics']['viewCount']
             yt_link = f"https://youtu.be/{video['id']}"
 
+            duration_video = video['contentDetails']['duration'][2:]
+
+            V = TimeVideo(duration_video)
+            
+            
+
             current_datetime = datetime.utcnow()
             pub_date = datetime.strptime(video['snippet']['publishedAt'], '%Y-%m-%dT%H:%M:%SZ')
             
@@ -57,7 +63,8 @@ def get_most_popular_videos(region_code="", category_ID=0):
                     'description' : video['snippet']['description'][:100],
                     'views_read' : convert_views_to_readable(vid_views),
                     'creatorID' : video['snippet']['channelId'],
-                    'profile_pic' : creator_profile_response['items'][i]['snippet']['thumbnails']['default']['url'] if i < len(creator_profile_response['items']) else 0
+                    'profile_pic' : creator_profile_response['items'][i]['snippet']['thumbnails']['default']['url'] if i < len(creator_profile_response['items']) else 0,
+                    'duration_video' : V.repr()
                 }
             )
 
