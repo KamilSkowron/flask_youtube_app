@@ -13,10 +13,11 @@ class Videos(Resource):
         data = request.get_json()
         title = data.get('title')
         creator = data.get('creator')
-        video_pic = data.get('video_pic')
+        # video_pic = data.get('video_pic')
         link_video = data.get('link_video')
 
-        video = Video_info(title=title,creator=creator,video_pic=video_pic, link_video=link_video)
+        video = Video_info(title=title,creator=creator,link_video=link_video)
+        
 
         db.session.add(video)
         db.session.commit()

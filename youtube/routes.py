@@ -1,14 +1,15 @@
 
-import code
-from turtle import title
+
 from flask import jsonify, redirect, url_for, make_response
 
 from youtube import app, render_template, secure_filename, db, request, Response, flash, api, Resource
 from youtube.models import Video_info
 from youtube.forms import AddNewVideoForm, SubmitButtonForm
-from youtube.functions import get_picture
+from youtube.functions import get_picture, get_yt_video_id, get_yt_title
 from youtube.apis import get_most_popular_videos
 from youtube.lists_of_data import region_list, category_list
+from urllib.parse import urlparse
+
 
 
 @app.route('/home')
@@ -23,14 +24,18 @@ def add_video():
 
     if form.validate_on_submit():
 
-        pic_name = get_picture("video_pic")
+        #pic_name = get_picture("video_pic")
 
-        video = Video_info(title=form.title.data,
+        url_data = get_yt_video_id(form.link_video.data)
+        title = get_yt_title(get_yt_video_id(form.link_video.data))
+
+
+        video = Video_info(title=title,
                         creator=form.creator.data,
-                        video_pic=pic_name,
-                        link_video=form.link_video.data)
+                        link_video=form.link_video.data,
+                        video_id=url_data
+                        )
         
-        form.title.data = ""
         form.creator.data = ""
         form.link_video.data = ""
         db.session.add(video)

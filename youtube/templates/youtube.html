@@ -10,10 +10,12 @@
 			<a href="{{ video.link_video }}" class="thumbnail-row">
 
 				<img class="thumbnail"
+				src='https://img.youtube.com/vi/{{ video.video_id }}/0.jpg';" style="height: 200px;"
+				align=" right">
+
 					
-					src="{{ url_for('static', filename='images/video_pics/' + video.video_pic) }}"
-					onerror="this.onerror=null;this.src='https://placeimg.com/1000/720/any';" style="height: 200px;"
-					align=" right">
+
+
 				<!--<div class="video-time">14:20</div> -->
 				
 

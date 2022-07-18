@@ -1,25 +1,18 @@
+import urllib.request
+import json
+import urllib
+import pprint
 
-class TimeVideo():
-    def __init__(self, time):
-        self.time = time
+#change to yours VideoID or change url inparams
+VideoID = "SZj6rAYkYOg" 
 
-    def __extract_data(self):
-        res = {}
-        data = ""
-        for i in self.time:
-            if i in 'HMS':
-                res[i], data = data, ""
-            else:
-                data += i
-        return res
+params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % VideoID}
+url = "https://www.youtube.com/oembed"
+query_string = urllib.parse.urlencode(params)
+url = url + "?" + query_string
 
-
-    def repr(self):
-        dict_time = self.__extract_data()
-        if "H" in dict_time and "M" in dict_time and "S" in dict_time: return f'{dict_time["H"]}:{dict_time["M"]}:{dict_time["S"]}'
-        elif "H" in dict_time and "S" in dict_time: return f'{dict_time["H"]}:00:{dict_time["S"]}'
-        elif "H" in dict_time and "M" in dict_time: return f'{dict_time["H"]}:{dict_time["M"]}:00'
-        elif "H" in dict_time: return f'{dict_time["H"]}:00:00'
-        elif "M" in dict_time and "S" in dict_time: return f'{dict_time["M"]}:{dict_time["S"]}'
-        elif "M" in dict_time: return f'{dict_time["M"]}:00'
-        elif "S" in dict_time: return f'00:{dict_time["S"]}'
+with urllib.request.urlopen(url) as response:
+    response_text = response.read()
+    data = json.loads(response_text.decode())
+    pprint.pprint(data)
+    print(data['title'])

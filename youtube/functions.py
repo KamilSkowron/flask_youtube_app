@@ -20,7 +20,41 @@ def convert_views_to_readable(views):
 	views_with_dots = ".".join(Z)
 	return views_with_dots
 
+def get_yt_video_id(url):
 
+    from urllib.parse import urlparse, parse_qs
+
+    if url.startswith(('youtu', 'www')):
+        url = 'http://' + url
+        
+    query = urlparse(url)
+    
+    if 'youtube' in query.hostname:
+        if query.path == '/watch':
+            return parse_qs(query.query)['v'][0]
+        elif query.path.startswith(('/embed/', '/v/')):
+            return query.path.split('/')[2]
+    elif 'youtu.be' in query.hostname:
+        return query.path[1:]
+    else:
+        raise ValueError
+
+def get_yt_title(video_id):
+    import urllib.request
+    import json
+    import urllib
+    import pprint
+
+    params = {"format": "json", "url": "https://www.youtube.com/watch?v=%s" % video_id}
+    url = "https://www.youtube.com/oembed"
+    query_string = urllib.parse.urlencode(params)
+    url = url + "?" + query_string
+
+    with urllib.request.urlopen(url) as response:
+        response_text = response.read()
+        data = json.loads(response_text.decode())
+        #pprint.pprint(data)
+        return(data['title'])
 class TimeVideo():
     def __init__(self, time):
         self.time = time
