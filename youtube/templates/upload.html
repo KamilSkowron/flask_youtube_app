@@ -5,15 +5,9 @@
 <form class="uploud-form-box" action="http://localhost:5000/upload" enctype="multipart/form-data" method="POST">
 	<div class="box-container">
 
-		{{ form.hidden_tag() }}
 		<div class="data-container">
-			{{ form.title.label(class="data-label") }}
-			{{ form.title(class="data-control", placeholder="Title") }}
-		</div>
-
-		<div class="data-container">
-			{{ form.creator.label(class="data-label") }}
-			{{ form.creator(class="data-control", placeholder="Music, Gaming, Education...") }}
+			{{ form.category.label(class="data-label") }}
+			{{ form.category(class="data-control", placeholder="Music, Gaming, Education...") }}
 		</div>
 
 

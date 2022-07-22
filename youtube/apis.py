@@ -6,7 +6,8 @@ import os
 
 def get_most_popular_videos(region_code="", category_ID=0):
     
-    api_key = os.environ.get('YT_API_KEY')
+    #api_key = os.environ.get('YT_API_KEY')
+    api_key = "AIzaSyArIsAUeMGdB83sqRYV-cqVLaJDzofPJ9g"
 
     youtube = build('youtube', 'v3', developerKey=api_key)
     videos = []

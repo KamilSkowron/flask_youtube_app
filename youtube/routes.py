@@ -22,21 +22,21 @@ def home_page():
 def add_video():
     form = AddNewVideoForm()
 
-    if form.validate_on_submit():
+    if form.is_submitted():
 
         #pic_name = get_picture("video_pic")
-
+        print(form.link_video.data)
         url_data = get_yt_video_id(form.link_video.data)
         title = get_yt_title(get_yt_video_id(form.link_video.data))
 
 
         video = Video_info(title=title,
-                        creator=form.creator.data,
+                        category=form.category.data,
                         link_video=form.link_video.data,
                         video_id=url_data
                         )
         
-        form.creator.data = ""
+        form.category.data = ""
         form.link_video.data = ""
         db.session.add(video)
         db.session.commit()

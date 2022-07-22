@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired, Length, URL
 
 
 class AddNewVideoForm(FlaskForm):
-    title = StringField(label='Title:', validators=[DataRequired(), Length(min=2, max=30)])
-    creator = StringField(label='Category:', validators=[DataRequired()])
+    title = StringField(label='Title:', validators=[Length(min=2, max=30)])
+    category = StringField(label='Category:', validators=[DataRequired()])
     link_video = StringField(label='Link url:', validators=[URL()])
     submit = SubmitField(label='Add new Video!')
 
