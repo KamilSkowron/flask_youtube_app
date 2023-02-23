@@ -16,10 +16,10 @@ http://localhost:5000/explore - Actual Youtube trends with search threw countrie
 
 # How to run?
 There is two ways to checkout this project:
-1) Clone all repo
+1) Normal installation
 - pip install -r requirements.txt
 - python run.py
 
-2) Download Dockerfile
+2) Docker installation with Dockerfile
 - docker build -t yt_app .
 - docker run -p5000:5000 --name yt_app yt_app
