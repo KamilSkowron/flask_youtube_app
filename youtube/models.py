@@ -20,4 +20,4 @@ class Video_info(db.Model):
 
 
 
-db.create_all()
+# db.create_all()
