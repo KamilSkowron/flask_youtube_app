@@ -1,7 +1,7 @@
 # flask_youtube_app
 
 # What is it?
-http://localhost:5000/home - Private youtube page with our favourite movies. We can adds,
+http://localhost:5000/home - Private youtube page with our favourite movies
 ![image](https://user-images.githubusercontent.com/86384863/220916165-e5d68a17-20cb-4cab-842e-5391ead2ce7e.png)
 
 http://localhost:5000/upload - Upload movies to private page
