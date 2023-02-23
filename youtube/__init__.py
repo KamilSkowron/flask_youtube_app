@@ -6,6 +6,7 @@ from flask_restx import Api, Resource
 
 # Start application
 app = Flask(__name__)
+app.app_context().push()
 
 # Configuration of the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
